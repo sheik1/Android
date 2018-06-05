@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.youtubeActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,14 +19,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button button = (Button)findViewById(R.id.button2);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), youtubeActivity.class );
-                startActivity(intent);
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), VisualizerActivity.class );
+            startActivity(intent);
 
 
-            }
         });
     }
 }
