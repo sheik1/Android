@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = (Button)findViewById(R.id.button2);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), VisualizerActivity.class );
+            Intent intent = new Intent(getApplicationContext(), youtubeActivity.class );
             startActivity(intent);
 
 
