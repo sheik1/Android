@@ -23,10 +23,7 @@ public class VisualizerActivity extends Activity implements Visualizer.OnDataCap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        waveformView = (WaveformView) findViewById(R.id.waveform_view);
+        setContentView(R.layout.activity_visualizer);
     }
 
     @Override
