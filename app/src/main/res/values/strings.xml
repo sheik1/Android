@@ -14,4 +14,16 @@
          <string name="string_help_text">The Record Audio permission is missing and Android requires this app to have this permission to be able to capture the current music stream. Although this gets displayed as the Microphone permission, this app does not capture microphone data, just the current audio playback\n\nTo grant this permission click on Settings, then Permissions and turn the Microphone permission on.\n\nThen click back twice to return to the app</string>
          <string name="quit">Exit App</string>
 
+        <string name="prompt_email">Email</string>
+        <string name="prompt_password">Password (optional)</string>
+        <string name="action_sign_in">Sign in or register</string>
+        <string name="action_sign_in_short">Sign in</string>
+        <string name="error_invalid_email">This email address is invalid</string>
+        <string name="error_invalid_password">This password is too short</string>
+        <string name="error_incorrect_password">This password is incorrect</string>
+        <string name="error_field_required">This field is required</string>
+        <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+
+
+
 </resources>
