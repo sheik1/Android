@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.sheikr.muziekapplicatie.Test.TaskListActivity;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.youtubeActivity;
 
@@ -22,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = (Button)findViewById(R.id.button2);
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), youtubeActivity.class );
+            Intent intent = new Intent(getApplicationContext(), TaskListActivity.class );
             startActivity(intent);
-
-
         });
     }
 }
