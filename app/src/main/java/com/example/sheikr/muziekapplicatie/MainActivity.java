@@ -20,13 +20,11 @@ public class MainActivity extends AppCompatActivity {
     GridView grid;
     String[] muziek = {
             "Music Player",
-            "Youtube Player",
             "Visualizer",
-            "Equalizer",
-            "Music Player List",
+            "Youtube Player",
             "Youtube Player List",
             "Drumpad",
-            "About"
+            "Equalizer"
     };
 
     int[] imageId = {
@@ -76,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent4);
                         break;
 
-                    case "Music Player List":
-                        break;
-
                     case "Youtube Player List":
                         break;
 
@@ -87,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent7);
                         break;
 
-                    case "About":
-                        break;
                 }
 
                 Toast.makeText(MainActivity.this, "You Clicked at " + muziek[+position], Toast.LENGTH_SHORT).show();

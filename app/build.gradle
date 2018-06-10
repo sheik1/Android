@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -36,4 +37,10 @@ dependencies {
     implementation 'com.diogobernardino:williamchart:2.2'
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
 
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
