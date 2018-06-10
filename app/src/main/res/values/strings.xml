@@ -4,6 +4,8 @@
         <string name="action_settings">Settings</string>
         <string name="action_delete">Clear Done</string>
 
+        <string name="eq">Equalizer</string>
+
         <string name="title_logo">Music</string>
         <string name="btn_skip_intro">Skip Intro</string>
 

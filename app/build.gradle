@@ -33,5 +33,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'io.realm:android-adapters:2.0.0'
+    implementation 'com.diogobernardino:williamchart:2.2'
+    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
 
 }
