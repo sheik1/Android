@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.sheikr.muziekapplicatie.drumpad.DrumpadActivity;
 import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
 import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
+import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.youtubeActivity;
 
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
             "Youtube Player",
             "Youtube Player List",
             "Drumpad",
-            "Equalizer"
+            "Equalizer",
+            "Upload"
     };
 
     int[] imageId = {
@@ -80,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
                     case "Equalizer":
                         Intent intent7 = new Intent(getApplicationContext(), EqualizerActivity.class );
                         startActivity(intent7);
+                        break;
+
+                    case "Upload":
+                        Intent intent6 = new Intent(getApplicationContext(), MusicUpload.class );
+                        startActivity(intent6);
                         break;
 
                 }
