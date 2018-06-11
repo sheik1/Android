@@ -33,13 +33,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
-    compile 'io.realm:android-adapters:2.0.0'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'io.realm:android-adapters:2.0.0'
     implementation 'com.diogobernardino:williamchart:2.2'
     implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
 
     implementation 'com.google.firebase:firebase-auth:16.0.1'
-    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.0'
 
 
