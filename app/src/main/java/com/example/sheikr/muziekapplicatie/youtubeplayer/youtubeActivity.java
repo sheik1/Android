@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sheikr.muziekapplicatie.R;
+import com.example.sheikr.muziekapplicatie.youtubeLijst.Youtube;
 import com.google.android.youtube.player.YouTubeApiServiceUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -32,6 +33,8 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailLoader.ErrorReason;
 import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -173,8 +176,10 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
     public static final class VideoListFragment extends ListFragment {
 
         private static final List<VideoEntry> VIDEO_LIST;
+
         static {
             List<VideoEntry> list = new ArrayList<VideoEntry>();
+
             list.add(new VideoEntry("YouTube Collection", "Y_UmWdcTrrc"));
             list.add(new VideoEntry("GMail Tap", "1KhZKNZO8mQ"));
             list.add(new VideoEntry("Chrome Multitask", "UiLSiqyDf4Y"));
@@ -191,8 +196,10 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
             adapter = new PageAdapter(getActivity(), VIDEO_LIST);
         }
+
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {

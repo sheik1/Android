@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="385dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
+
+    <EditText
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:id="@+id/edtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:gravity="left|center_horizontal"
+       />
+
+    <EditText
+        android:id="@+id/edtLink"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/edtTitle"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:gravity="left|center_horizontal"
+        />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_below="@id/edtLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toevoegen"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+         />
+
+    <ListView
+        android:id="@+id/listviewLinks"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="324dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/btnAdd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp" />
+
+</RelativeLayout>

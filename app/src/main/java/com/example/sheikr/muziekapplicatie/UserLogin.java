@@ -1,7 +1,9 @@
 package com.example.sheikr.muziekapplicatie;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sheikr.muziekapplicatie.youtubeLijst.YoutubeListPanel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,13 +30,16 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
     private EditText mPasswordField;
 
     // [START declare_auth]
-    private FirebaseAuth mAuth;
+    public FirebaseAuth mAuth;
     // [END declare_auth]
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_userlogin);
+
+
 
         // Views
         mStatusTextView = findViewById(R.id.status);
@@ -113,7 +119,12 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class );
+                            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(UserLogin.this);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("gebruiker", user.getUid());
+                            editor.apply();
+
+                            Intent intent = new Intent(getApplicationContext(), YoutubeListPanel.class );
                             startActivity(intent);
 
                         } else {
@@ -137,6 +148,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
 
     private void signOut() {
         mAuth.signOut();
+
         updateUI(null);
     }
 
@@ -228,6 +240,5 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
             sendEmailVerification();
         }
     }
-
 
 }
