@@ -17,6 +17,7 @@ import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
 import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
 import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
+import com.example.sheikr.muziekapplicatie.youtubeLijst.YoutubeListPanel;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(youtube);
                 break;
             case R.id.nav_youtube_list:
-                Intent main = new Intent(getApplicationContext(), MainActivity.class );
-                startActivity(main);
+                Intent youtubelist = new Intent(getApplicationContext(), YoutubeListPanel.class );
+                startActivity(youtubelist);
                 break;
             case R.id.nav_streamboxr:
                 Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );

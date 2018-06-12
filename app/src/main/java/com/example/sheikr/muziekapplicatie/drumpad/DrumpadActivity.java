@@ -28,6 +28,7 @@ import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
 import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
 import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
+import com.example.sheikr.muziekapplicatie.youtubeLijst.YoutubeListPanel;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -81,7 +82,6 @@ public class DrumpadActivity extends MainActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Log.d("hello1", "hello222222222222");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -244,8 +244,8 @@ public class DrumpadActivity extends MainActivity {
                 startActivity(youtube);
                 break;
             case R.id.nav_youtube_list:
-                Intent main = new Intent(getApplicationContext(), MainActivity.class );
-                startActivity(main);
+                Intent youtubelist = new Intent(getApplicationContext(), YoutubeListPanel.class );
+                startActivity(youtubelist);
                 break;
             case R.id.nav_streamboxr:
                 Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );
