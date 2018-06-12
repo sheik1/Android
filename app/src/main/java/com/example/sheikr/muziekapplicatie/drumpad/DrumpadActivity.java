@@ -3,19 +3,37 @@ package com.example.sheikr.muziekapplicatie.drumpad;
 import android.app.Activity;
 import java.io.IOException;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.example.sheikr.muziekapplicatie.MainActivity;
 import com.example.sheikr.muziekapplicatie.R;
+import com.example.sheikr.muziekapplicatie.UserLogin;
+import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
+import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
+import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
+import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
+import com.example.sheikr.muziekapplicatie.youtubeplayer.youtubeActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class DrumpadActivity extends Activity {
+public class DrumpadActivity extends MainActivity {
 
+    private DrawerLayout drawer;
     View bass_pad, snare_pad, tom1_pad, tom2_pad, cymbal1_pad, cymbal2_pad,
             hihat1_pad, hihat2_pad;
     MediaPlayer mp, bass_pad_mp, snare_pad_mp, tom1_pad_mp, tom2_pad_mp,
@@ -55,6 +73,19 @@ public class DrumpadActivity extends Activity {
         cymbal2_pad.setOnClickListener(play_sound);
         hihat1_pad.setOnClickListener(play_sound);
         hihat2_pad.setOnClickListener(play_sound);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.draw_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        Log.d("hello1", "hello222222222222");
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
     }
     View.OnClickListener play_sound = new View.OnClickListener() {
@@ -160,6 +191,11 @@ public class DrumpadActivity extends Activity {
     // event handler for back button press
     @Override
     public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
         new AlertDialog.Builder(this)
                 .setMessage("Are you sure to exit?")
                 .setCancelable(false)
@@ -199,6 +235,48 @@ public class DrumpadActivity extends Activity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.d("MUsicupload", "onNavigationItemSelected: ");
+        switch (item.getItemId()){
+            case R.id.nav_youtube:
+                Intent youtube = new Intent(getApplicationContext(), youtubeActivity.class );
+                startActivity(youtube);
+                break;
+            case R.id.nav_youtube_list:
+                Intent main = new Intent(getApplicationContext(), MainActivity.class );
+                startActivity(main);
+                break;
+            case R.id.nav_streamboxr:
+                Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );
+                startActivity(stream);
+                break;
+            case R.id.nav_visualizer:
+                Intent viz = new Intent(getApplicationContext(), VisualizerActivity.class );
+                startActivity(viz);
+                break;
+            case R.id.nav_equalizer:
+                Intent equa = new Intent(getApplicationContext(), EqualizerActivity.class );
+                startActivity(equa);
+                break;
+            case R.id.nav_drumpad:
+                Intent drum = new Intent(getApplicationContext(), DrumpadActivity.class );
+                startActivity(drum);
+                break;
+            case R.id.nav_upload:
+                Intent upload = new Intent(getApplicationContext(), MusicUpload.class );
+                startActivity(upload);
+                break;
+            case R.id.nav_signout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), UserLogin.class );
+                startActivity(intent);
+                break;
 
+            default:
+                break;
+        }
+        return true;
+    }
 
 }

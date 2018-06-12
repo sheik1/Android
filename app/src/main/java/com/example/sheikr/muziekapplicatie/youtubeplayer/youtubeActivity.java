@@ -62,7 +62,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 
-public class youtubeActivity extends AppCompatActivity implements YouTubePlayer.OnFullscreenListener, NavigationView.OnNavigationItemSelectedListener {
+public class youtubeActivity extends MainActivity implements YouTubePlayer.OnFullscreenListener{
 
     private static final int ANIMATION_DURATION_MILLIS = 300;
     private static final int LANDSCAPE_VIDEO_PADDING_DP = 5;
@@ -92,6 +92,7 @@ public class youtubeActivity extends AppCompatActivity implements YouTubePlayer.
         closeButton = findViewById(R.id.close_button);
 
         videoBox.setVisibility(View.INVISIBLE);
+
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
