@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +35,12 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailLoader.ErrorReason;
 import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +51,7 @@ import java.util.Map;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-
+//https://github.com/akoscz/YouTubePlaylist
 
 public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscreenListener {
 
@@ -175,20 +181,10 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
 
     public static final class VideoListFragment extends ListFragment {
 
-        private static final List<VideoEntry> VIDEO_LIST;
+        ValueEventListener valueEventListener;
+        List<VideoEntry> list = new ArrayList<VideoEntry>();
 
-        static {
-            List<VideoEntry> list = new ArrayList<VideoEntry>();
-
-            list.add(new VideoEntry("YouTube Collection", "Y_UmWdcTrrc"));
-            list.add(new VideoEntry("GMail Tap", "1KhZKNZO8mQ"));
-            list.add(new VideoEntry("Chrome Multitask", "UiLSiqyDf4Y"));
-            list.add(new VideoEntry("Google Fiber", "re0VRK6ouwI"));
-            list.add(new VideoEntry("Autocompleter", "blB_X38YSxQ"));
-            list.add(new VideoEntry("GMail Motion", "Bu927_ul_X0"));
-            list.add(new VideoEntry("Translate for Animals", "3I24bSteJpw"));
-            VIDEO_LIST = Collections.unmodifiableList(list);
-        }
+       private List<VideoEntry> VIDEO_LIST ;
 
         private PageAdapter adapter;
         private View videoBox;
@@ -197,9 +193,28 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("youtube");
+
+            valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    for(DataSnapshot out: dataSnapshot.getChildren()){
+                        Youtube youtube = out.getValue(Youtube.class);
+
+                        list.add(new VideoEntry(youtube.getTitel(), youtube.getLink()));
+                    }
+                    VIDEO_LIST = Collections.unmodifiableList(list);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             adapter = new PageAdapter(getActivity(), VIDEO_LIST);
         }
-
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {

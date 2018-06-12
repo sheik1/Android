@@ -12,4 +12,10 @@
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_300">#E0E0E0</color>
     <color name="grey_500">#9E9E9E</color>
+    <color name="semi_transparent_black">#90000000</color>
+
+        <color name="black">#000</color>
+        <color name="photo_tint">#38101010</color>
+
+
 </resources>

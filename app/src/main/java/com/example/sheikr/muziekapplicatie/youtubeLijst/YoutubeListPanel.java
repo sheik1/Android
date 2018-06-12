@@ -49,7 +49,7 @@ public class YoutubeListPanel extends AppCompatActivity {
         setContentView(R.layout.activity_database_add);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(YoutubeListPanel.this);
-      user = sp.getString("gebruiker", null);
+         user = sp.getString("gebruiker", null);
 
         databaseYoutube = FirebaseDatabase.getInstance().getReference("youtube");
 
