@@ -1,23 +1,26 @@
 package com.example.sheikr.muziekapplicatie.musicPlayer;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.WebView;
 
+import com.example.sheikr.muziekapplicatie.MainActivity;
 import com.example.sheikr.muziekapplicatie.R;
 
 public class PlayListActivity extends Activity {
 
-    private WebView webView;
-
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_playlist);
+        setContentView(R.layout.activity_main);
 
-        webView = (WebView)findViewById(R.id.webView1);
-        webView.getSettings().setJavaScriptEnabled(false);
-        webView.loadUrl("https://streamboxr.com/demo");
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class );
+        startActivity(intent);
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("https://streamboxr.com/index.php/auth/login"));
+        startActivity(browserIntent);
 
     }
 }
