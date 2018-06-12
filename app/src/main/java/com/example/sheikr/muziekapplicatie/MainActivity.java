@@ -13,7 +13,7 @@ import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
 import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
 import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
-import com.example.sheikr.muziekapplicatie.youtubeplayer.youtubeActivity;
+import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case "Youtube Player":
-                        Intent intent2 = new Intent(getApplicationContext(), youtubeActivity.class );
+                        Intent intent2 = new Intent(getApplicationContext(), YoutubeActivity.class );
                         startActivity(intent2);
                         break;
 

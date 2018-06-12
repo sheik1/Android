@@ -1,4 +1,4 @@
-package com.example.sheikr.muziekapplicatie.Test3;
+package com.example.sheikr.muziekapplicatie.youtubeplayer;
 
 public class YoutubeVideo {
 

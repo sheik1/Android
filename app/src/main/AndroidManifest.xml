@@ -43,13 +43,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".youtubeplayer.youtubeActivity" android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".visualizer.VisualizerActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -92,7 +85,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Test3.Test3Activity" android:label="@string/app_name">
+        <activity android:name=".youtubeplayer.YoutubeActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

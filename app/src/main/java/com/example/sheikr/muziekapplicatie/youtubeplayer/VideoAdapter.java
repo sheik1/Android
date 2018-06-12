@@ -1,4 +1,4 @@
-package com.example.sheikr.muziekapplicatie.Test3;
+package com.example.sheikr.muziekapplicatie.youtubeplayer;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

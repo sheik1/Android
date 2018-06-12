@@ -1,4 +1,4 @@
-package com.example.sheikr.muziekapplicatie.Test3;
+package com.example.sheikr.muziekapplicatie.youtubeplayer;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.sheikr.muziekapplicatie.R;
-import com.example.sheikr.muziekapplicatie.youtubeLijst.Youtube;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Vector;
 
-public class Test3Activity extends AppCompatActivity {
+public class YoutubeActivity extends AppCompatActivity {
 
     DatabaseReference databaseYoutube;
     ValueEventListener valueEventListener;
@@ -28,7 +27,7 @@ public class Test3Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test3);
+        setContentView(R.layout.activity_youtube_player);
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

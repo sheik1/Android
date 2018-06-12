@@ -7,9 +7,6 @@
         <string name="eq">Equalizer</string>
 
         <string name="title_logo">Music</string>
-        <string name="btn_skip_intro">Skip Intro</string>
-
-        <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
 
         <string name="no_permissions">This app requires the Microphone permission to run.\n\nPlease grant this permission when prompted.</string>
          <string name="settings">Settings</string>
@@ -41,15 +38,5 @@
         <string name="firebase_status_fmt">Firebase User: %s</string>
         <string name="auth_failed">Authentication failed</string>
         <string name="action_recycler_view">RecyclerView</string>
-
-    <string name="action_about">About</string>
-    <string name="alert_title">Attention!</string>
-    <string name="alert_message">Unable to load data. \nCheck your connection!</string>
-    <string name="alert_positive">Close</string>
-    <string name="video">Video</string>
-    <string name="info_text">This is a simple app that shows the use of YoutubeParser library.
-         &lt;br /&gt;&lt;br /&gt;You can find the source code on </string>
-    <string name="author">&lt;br /&gt;&lt;br /&gt;Written by Marco Gomiero</string>
-
 
 </resources>

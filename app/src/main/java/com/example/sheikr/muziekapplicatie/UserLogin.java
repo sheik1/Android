@@ -14,8 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.sheikr.muziekapplicatie.Test3.Test3Activity;
-import com.example.sheikr.muziekapplicatie.youtubeplayer.youtubeActivity;
+import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -83,7 +82,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(getApplicationContext(), Test3Activity.class );
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class );
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -124,7 +123,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                             editor.putString("gebruiker", user.getUid());
                             editor.apply();
 
-                            Intent intent = new Intent(getApplicationContext(), Test3Activity.class );
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class );
 
                             startActivity(intent);
 
