@@ -3,15 +3,22 @@ package com.example.sheikr.muziekapplicatie.youtubeplayer;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -22,7 +29,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.example.sheikr.muziekapplicatie.MainActivity;
 import com.example.sheikr.muziekapplicatie.R;
+import com.example.sheikr.muziekapplicatie.UserLogin;
+import com.example.sheikr.muziekapplicatie.drumpad.DrumpadActivity;
+import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
+import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
+import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
+import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.google.android.youtube.player.YouTubeApiServiceUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -32,6 +47,7 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailLoader.ErrorReason;
 import com.google.android.youtube.player.YouTubeThumbnailView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +60,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 
-public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscreenListener {
+public class youtubeActivity extends AppCompatActivity implements YouTubePlayer.OnFullscreenListener, NavigationView.OnNavigationItemSelectedListener {
 
     private static final int ANIMATION_DURATION_MILLIS = 300;
     private static final int LANDSCAPE_VIDEO_PADDING_DP = 5;
@@ -54,7 +70,7 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
 
     private VideoListFragment listFragment;
     private VideoFragment videoFragment;
-
+    private DrawerLayout drawer;
     private View videoBox;
     private View closeButton;
 
@@ -74,6 +90,16 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
         closeButton = findViewById(R.id.close_button);
 
         videoBox.setVisibility(View.INVISIBLE);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.draw_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
         layout();
 
@@ -169,6 +195,7 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
             });
         }
     }
+
 
     public static final class VideoListFragment extends ListFragment {
 
@@ -438,6 +465,59 @@ public class youtubeActivity extends Activity implements YouTubePlayer.OnFullscr
         params.height = height;
         params.gravity = gravity;
         view.setLayoutParams(params);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_youtube:
+                Intent youtube = new Intent(getApplicationContext(), youtubeActivity.class );
+                startActivity(youtube);
+                break;
+            case R.id.nav_youtube_list:
+                Intent main = new Intent(getApplicationContext(), MainActivity.class );
+                startActivity(main);
+                break;
+            case R.id.nav_streamboxr:
+                Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );
+                startActivity(stream);
+                break;
+            case R.id.nav_visualizer:
+                Intent viz = new Intent(getApplicationContext(), VisualizerActivity.class );
+                startActivity(viz);
+                break;
+            case R.id.nav_equalizer:
+                Intent equa = new Intent(getApplicationContext(), EqualizerActivity.class );
+                startActivity(equa);
+                break;
+            case R.id.nav_drumpad:
+                Intent drum = new Intent(getApplicationContext(), DrumpadActivity.class );
+                startActivity(drum);
+                break;
+            case R.id.nav_upload:
+                Intent upload = new Intent(getApplicationContext(), MusicUpload.class );
+                startActivity(upload);
+                break;
+            case R.id.nav_signout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), UserLogin.class );
+                startActivity(intent);
+                break;
+
+            default:
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
 

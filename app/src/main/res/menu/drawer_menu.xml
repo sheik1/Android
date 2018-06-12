@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_youtube"
+            android:icon="@drawable/ic_youtube"
+            android:title="Youtube"/>
+        <item android:id="@+id/nav_youtube_list"
+            android:icon="@drawable/ic_youtube_list"
+            android:title="Youtube List"/>
+        <item android:id="@+id/nav_streamboxr"
+            android:icon="@drawable/ic_streamboxr"
+            android:title="Streamboxr"/>
+        <item android:id="@+id/nav_visualizer"
+            android:icon="@drawable/ic_file_upload"
+            android:title="Visualizer"/>
+        <item android:id="@+id/nav_equalizer"
+            android:icon="@drawable/ic_equalizer"
+            android:title="Equalizer"/>
+        <item android:id="@+id/nav_drumpad"
+            android:icon="@drawable/ic_drumpad"
+            android:title="Drumpad"/>
+        <item android:id="@+id/nav_upload"
+            android:icon="@drawable/ic_file_upload"
+            android:title="Upload"/>
+    </group>
+
+    <item android:title="Sign out">
+        <menu>
+            <item android:id="@+id/nav_signout"
+                android:title="Signout"
+                android:icon="@drawable/ic_logout">
+
+            </item>
+        </menu>
+    </item>
+
+</menu>
