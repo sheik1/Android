@@ -104,7 +104,10 @@ public class YoutubeListPanel extends AppCompatActivity {
                 for(DataSnapshot youtubeSnapshot: dataSnapshot.getChildren()){
                     Youtube youtube = youtubeSnapshot.getValue(Youtube.class);
 
-                    youtubeList.add(youtube);
+                    if(user.equals(youtube.getGebruiker()) ) {
+
+                        youtubeList.add(youtube);
+                    }
                 }
 
                 YoutubeList adapter = new YoutubeList(YoutubeListPanel.this, youtubeList);

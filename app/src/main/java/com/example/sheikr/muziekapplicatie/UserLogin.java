@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -120,7 +118,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
 
                             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(UserLogin.this);
                             SharedPreferences.Editor editor = sp.edit();
-                            editor.putString("gebruiker", user.getUid());
+                            editor.putString("gebruiker", user.getEmail());
                             editor.apply();
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class );

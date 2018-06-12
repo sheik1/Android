@@ -1,6 +1,8 @@
 package com.example.sheikr.muziekapplicatie.youtubeplayer;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,10 +26,15 @@ public class YoutubeActivity extends AppCompatActivity {
 
     Vector<YoutubeVideo> youtubeVideos = new Vector<YoutubeVideo>();
 
+    String user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube_player);
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(YoutubeActivity.this);
+        user = sp.getString("gebruiker", null);
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -41,11 +48,14 @@ public class YoutubeActivity extends AppCompatActivity {
                 for(DataSnapshot youtubeSnapshot: dataSnapshot.getChildren()){
                     VideoModel videoModel = youtubeSnapshot.getValue(VideoModel.class);
 
-                    youtubeVideos.add(new YoutubeVideo("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/"+ videoModel.getLink() +"\" frameborder=\"0\"  allowfullscreen></iframe>"));
+                    if(user.equals(videoModel.getGebruiker()) ) {
 
-                    VideoAdapter videoAdapter = new VideoAdapter(youtubeVideos);
+                        youtubeVideos.add(new YoutubeVideo("<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoModel.getLink() + "\" frameborder=\"0\"  allowfullscreen></iframe>"));
 
-                    recyclerView.setAdapter(videoAdapter);
+                        VideoAdapter videoAdapter = new VideoAdapter(youtubeVideos);
+
+                        recyclerView.setAdapter(videoAdapter);
+                    }
                 }
             }
 
