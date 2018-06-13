@@ -5,10 +5,12 @@ package com.example.sheikr.muziekapplicatie.musicupload;
 import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -52,6 +54,7 @@ public class MusicUpload extends MainActivity{
     private FirebaseAuth mAuth;
     private TextView username;
     private Button btnChoose, btnUpload, streamBtn;
+    private String user;
 
 
     private Uri filePath;
@@ -67,7 +70,6 @@ public class MusicUpload extends MainActivity{
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.uploadBTN);
 
-        username = (TextView) findViewById(R.id.usernameView);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -78,11 +80,16 @@ public class MusicUpload extends MainActivity{
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MusicUpload.this);
+        user = sp.getString("gebruiker", null);
+        NavigationView navview = (NavigationView) findViewById(R.id.nav_view);
+        View headerView =  navview.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
+        navUsername.setText(user);
 
 //        streamBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -1,7 +1,9 @@
 package com.example.sheikr.muziekapplicatie;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.sheikr.muziekapplicatie.drumpad.DrumpadActivity;
 import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
@@ -20,17 +24,20 @@ import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.example.sheikr.muziekapplicatie.youtubeLijst.YoutubeListPanel;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.auth.FirebaseUser;
+import com.prof.youtubeparser.models.stats.Main;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private FirebaseAuth mAuth;
+    private String email;
+    private String  user;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("hello1", "hello111111111111111");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,6 +51,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        TextView ue =(TextView) findViewById(R.id.emailuser);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        user = sp.getString("gebruiker", null);
+        System.out.println(user);
+        ue.setText(user);
+        NavigationView navview = (NavigationView) findViewById(R.id.nav_view);
+        View headerView =  navview.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
+        navUsername.setText(user);
+
 
     }
 
@@ -99,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
+
 }
 
 
