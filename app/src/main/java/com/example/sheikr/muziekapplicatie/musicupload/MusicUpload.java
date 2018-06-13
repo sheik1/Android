@@ -103,25 +103,29 @@ public class MusicUpload extends MainActivity{
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseImage();
+                chooseMP3();
+
             }
         });
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+                uploadMP3();
+
             }
+
         });
     }
 
 
 
-    private void chooseImage() {
+    private void chooseMP3() {
         Intent intent = new Intent();
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Music"), PICK_MUSIC_REQUEST);
+
     }
 
     @Override
@@ -142,7 +146,7 @@ public class MusicUpload extends MainActivity{
         }
     }
 
-    private void uploadImage() {
+    private void uploadMP3() {
 
         if(filePath != null)
         {
@@ -189,7 +193,6 @@ public class MusicUpload extends MainActivity{
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.d("MUsicupload", "onNavigationItemSelected: ");
         switch (item.getItemId()){
             case R.id.nav_youtube:
                 Intent youtube = new Intent(getApplicationContext(), YoutubeActivity.class );
