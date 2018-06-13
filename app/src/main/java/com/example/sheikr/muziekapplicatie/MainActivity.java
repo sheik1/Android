@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        TextView ue =(TextView) findViewById(R.id.emailuser);
+        TextView ue =(TextView) findViewById(R.id.main_activity_email);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         user = sp.getString("gebruiker", null);
         System.out.println(user);
