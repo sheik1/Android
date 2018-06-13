@@ -108,6 +108,7 @@ public class YoutubeActivity extends MainActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         }
 
     }
@@ -123,35 +124,43 @@ public class YoutubeActivity extends MainActivity {
             case R.id.nav_youtube:
                 Intent youtube = new Intent(getApplicationContext(), YoutubeActivity.class );
                 startActivity(youtube);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_youtube_list:
                 Intent youtubelist = new Intent(getApplicationContext(), YoutubeListPanel.class );
                 startActivity(youtubelist);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_streamboxr:
                 Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );
                 startActivity(stream);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_visualizer:
                 Intent viz = new Intent(getApplicationContext(), VisualizerActivity.class );
                 startActivity(viz);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_equalizer:
                 Intent equa = new Intent(getApplicationContext(), EqualizerActivity.class );
                 startActivity(equa);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_drumpad:
                 Intent drum = new Intent(getApplicationContext(), DrumpadActivity.class );
                 startActivity(drum);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_upload:
                 Intent upload = new Intent(getApplicationContext(), MusicUpload.class );
                 startActivity(upload);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_signout:
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(), UserLogin.class );
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
 
             default:

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -122,8 +123,8 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                             editor.apply();
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class );
-
                             startActivity(intent);
+                            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
                         } else {
                             // If sign in fails, display a message to the user.
