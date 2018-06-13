@@ -93,7 +93,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".musicupload.MusicUpload"
+        <activity android:name=".musicupload.MusicPlay"
             android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.example.sheikr.muziekapplicatie.drumpad.DrumpadActivity;
 import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
 import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
+import com.example.sheikr.muziekapplicatie.musicupload.MusicPlay;
 import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.example.sheikr.muziekapplicatie.youtubeLijst.YoutubeListPanel;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(drum);
                 break;
             case R.id.nav_upload:
-                Intent upload = new Intent(getApplicationContext(), MusicUpload.class );
+                Intent upload = new Intent(getApplicationContext(), MusicPlay.class );
                 startActivity(upload);
                 break;
             case R.id.nav_signout:

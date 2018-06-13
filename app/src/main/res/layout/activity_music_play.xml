@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp">
+
+
+        <TextView
+            android:id="@+id/txtMusicName"
+            android:layout_marginTop="@dimen/profile_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/txtMusicLink"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="muziek link"
+            android:textAlignment="center"
+            android:layout_below="@id/txtMusicName" />
+
+    </RelativeLayout>
+</LinearLayout>

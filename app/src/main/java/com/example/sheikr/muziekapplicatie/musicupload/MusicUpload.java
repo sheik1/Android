@@ -1,14 +1,22 @@
 package com.example.sheikr.muziekapplicatie.musicupload;
 
 
+//https://www.simplifiedcoding.net/firebase-storage-example/
+//http://javasampleapproach.com/android/firebase-storage-get-list-files-display-image-firebase-ui-database-android
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -46,12 +54,17 @@ import java.util.UUID;
 
 public class MusicUpload extends MainActivity{
 
+    private DatabaseReference mDatabaseReference;
+    private StorageReference musicReference;
+
     FirebaseStorage storage;
     StorageReference storageReference;
     private DrawerLayout drawer;
     private FirebaseAuth mAuth;
     private TextView username;
     private Button btnChoose, btnUpload, streamBtn;
+
+    String user;
 
 
     private Uri filePath;
@@ -63,6 +76,11 @@ public class MusicUpload extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.music_upload);
 
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MusicUpload.this);
+        user = sp.getString("gebruiker", null);
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("music");
+        musicReference = FirebaseStorage.getInstance().getReference().child("music");
 
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.uploadBTN);
@@ -78,20 +96,9 @@ public class MusicUpload extends MainActivity{
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-//        streamBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), MusicStream.class);
-//                startActivity(intent);
-//            }
-//        });
-
 
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +116,6 @@ public class MusicUpload extends MainActivity{
     }
 
 
-
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("audio/*");
@@ -124,14 +130,6 @@ public class MusicUpload extends MainActivity{
                 && data != null && data.getData() != null )
         {
             filePath = data.getData();
-//            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-//                imageView.setImageBitmap(bitmap);
-//            }
-//            catch (IOException e)
-//            {
-//                e.printStackTrace();
-//            }
         }
     }
 
@@ -149,6 +147,12 @@ public class MusicUpload extends MainActivity{
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
+
+                            String name = taskSnapshot.getMetadata().getName();
+                            String downloadUrl = taskSnapshot.getMetadata().getReference().toString();
+
+                            writeNewMusicInfoToDB(user, name, downloadUrl);
+
                             Toast.makeText(MusicUpload.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -168,6 +172,13 @@ public class MusicUpload extends MainActivity{
                         }
                     });
         }
+    }
+
+    private void writeNewMusicInfoToDB(String gebruiker, String name, String url){
+        MusicModel info = new MusicModel(gebruiker, name, url);
+
+        String key = mDatabaseReference.push().getKey();
+        mDatabaseReference.child(key).setValue(info);
     }
 
     @Override
