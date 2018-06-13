@@ -4,11 +4,13 @@ import android.app.Activity;
 import java.io.IOException;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.TextView;
 
 import com.example.sheikr.muziekapplicatie.MainActivity;
 import com.example.sheikr.muziekapplicatie.R;
@@ -34,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class DrumpadActivity extends MainActivity {
 
+    private String user;
     private DrawerLayout drawer;
     View bass_pad, snare_pad, tom1_pad, tom2_pad, cymbal1_pad, cymbal2_pad,
             hihat1_pad, hihat2_pad;
@@ -86,6 +90,13 @@ public class DrumpadActivity extends MainActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(DrumpadActivity.this);
+        user = sp.getString("gebruiker", null);
+        NavigationView navview = (NavigationView) findViewById(R.id.nav_view);
+        View headerView =  navview.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
+        navUsername.setText(user);
 
     }
     View.OnClickListener play_sound = new View.OnClickListener() {

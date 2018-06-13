@@ -1,9 +1,5 @@
 package com.example.sheikr.muziekapplicatie.musicupload;
 
-
-//https://www.simplifiedcoding.net/firebase-storage-example/
-//http://javasampleapproach.com/android/firebase-storage-get-list-files-display-image-firebase-ui-database-android
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 
@@ -63,9 +59,7 @@ public class MusicUpload extends MainActivity{
     private FirebaseAuth mAuth;
     private TextView username;
     private Button btnChoose, btnUpload, streamBtn;
-
-    String user;
-
+    private String user;
 
     private Uri filePath;
 
@@ -85,7 +79,6 @@ public class MusicUpload extends MainActivity{
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnUpload = (Button) findViewById(R.id.uploadBTN);
 
-        username = (TextView) findViewById(R.id.usernameView);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
@@ -100,23 +93,30 @@ public class MusicUpload extends MainActivity{
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        NavigationView navview = (NavigationView) findViewById(R.id.nav_view);
+        View headerView =  navview.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
+        navUsername.setText(user);
+
         btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chooseImage();
+                chooseMP3();
+
             }
         });
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage();
+                uploadMP3();
+
             }
+
         });
     }
 
-
-    private void chooseImage() {
+    private void chooseMP3() {
         Intent intent = new Intent();
         intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -133,7 +133,7 @@ public class MusicUpload extends MainActivity{
         }
     }
 
-    private void uploadImage() {
+    private void uploadMP3() {
 
         if(filePath != null)
         {
@@ -193,7 +193,6 @@ public class MusicUpload extends MainActivity{
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.d("MUsicupload", "onNavigationItemSelected: ");
         switch (item.getItemId()){
             case R.id.nav_youtube:
                 Intent youtube = new Intent(getApplicationContext(), YoutubeActivity.class );

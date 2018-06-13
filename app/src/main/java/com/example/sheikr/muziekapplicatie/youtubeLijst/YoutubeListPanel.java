@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sheikr.muziekapplicatie.MainActivity;
@@ -95,6 +96,12 @@ public class YoutubeListPanel extends MainActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        NavigationView navview = (NavigationView) findViewById(R.id.nav_view);
+        View headerView =  navview.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
+        navUsername.setText(user);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

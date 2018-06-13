@@ -11,6 +11,7 @@
 
 <LinearLayout
         android:id="@+id/middle_container"
+        android:paddingTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="100"

@@ -14,7 +14,7 @@
             android:icon="@drawable/ic_streamboxr"
             android:title="Streamboxr"/>
         <item android:id="@+id/nav_visualizer"
-            android:icon="@drawable/ic_file_upload"
+            android:icon="@drawable/ic_viz"
             android:title="Visualizer"/>
         <item android:id="@+id/nav_equalizer"
             android:icon="@drawable/ic_equalizer"
