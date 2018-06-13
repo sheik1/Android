@@ -194,6 +194,10 @@ public class MusicUpload extends MainActivity{
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.nav_firebase_music:
+                Intent music = new Intent(getApplicationContext(), MusicActivity.class );
+                startActivity(music);
+                break;
             case R.id.nav_youtube:
                 Intent youtube = new Intent(getApplicationContext(), YoutubeActivity.class );
                 startActivity(youtube);

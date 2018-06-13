@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.example.sheikr.muziekapplicatie.drumpad.DrumpadActivity;
 import com.example.sheikr.muziekapplicatie.equalizer.EqualizerActivity;
 import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
+
+import com.example.sheikr.muziekapplicatie.musicupload.MusicActivity;
 import com.example.sheikr.muziekapplicatie.musicupload.MusicPlay;
 import com.example.sheikr.muziekapplicatie.musicupload.MusicUpload;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
@@ -79,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.nav_firebase_music:
+                Intent music = new Intent(getApplicationContext(), MusicActivity.class );
+                startActivity(music);
+                break;
             case R.id.nav_youtube:
                 Intent youtube = new Intent(getApplicationContext(), YoutubeActivity.class );
                 startActivity(youtube);

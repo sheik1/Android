@@ -96,6 +96,9 @@
         <activity android:name=".musicupload.MusicPlay"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".musicupload.MusicActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>
