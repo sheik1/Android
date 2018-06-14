@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#4a4a4a">
 
     <!-- Player Header -->
@@ -49,6 +50,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/adele"/>
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/MusicListView"
+        android:layout_width="match_parent"
+        android:layout_height="324dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/btnAdd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+
 
     <!-- Player Footer -->
     <LinearLayout

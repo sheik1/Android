@@ -2,6 +2,7 @@ package com.example.sheikr.muziekapplicatie.musicupload;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.sheikr.muziekapplicatie.MainActivity;
@@ -26,7 +26,10 @@ import com.example.sheikr.muziekapplicatie.musicPlayer.PlayListActivity;
 import com.example.sheikr.muziekapplicatie.visualizer.VisualizerActivity;
 import com.example.sheikr.muziekapplicatie.youtubeLijst.YoutubeListPanel;
 import com.example.sheikr.muziekapplicatie.youtubeplayer.YoutubeActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 
@@ -34,12 +37,24 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
 
     private DrawerLayout drawer;
     private String user;
+    public String url;
+    private MediaPlayer mediaPlayer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_list);
+
+        Intent musicPlay = getIntent();
+        Bundle b = musicPlay.getExtras();
+
+        if(b!= null){
+            url = (String) b.get("url");
+        }
+
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MusicActivity.this);
         user = sp.getString("gebruiker", null);
@@ -55,45 +70,40 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        Button playButton = (Button) findViewById(R.id.play_button);
-
         NavigationView navview = (NavigationView) findViewById(R.id.nav_view);
         View headerView =  navview.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
         navUsername.setText(user);
 
 
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
+        fetchAudioUrlFromFirebase();
+    }
 
-                    Uri myUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/musicapp-82f20.appspot.com/o/music%2F1ab89be3-abcf-41ea-800b-8e860b89d641?alt=media&token=215f5606-44d6-4b72-a5c5-cb588b4f3713");
-                    System.out.println(myUri);
-                    MediaPlayer mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(v.getContext(), myUri);
-                    mediaPlayer.prepare();
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
-                        @Override
-                        public void onPrepared(MediaPlayer player){
-                            player.start();
-                        }
-                    });
-                }catch(IOException e){
+    private void fetchAudioUrlFromFirebase(){
+
+        final FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReferenceFromUrl(url);
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                try {
+                    final String url = uri.toString();
+                    mediaPlayer.setDataSource(url);
+                    mediaPlayer.setOnPreparedListener(MusicActivity.this);
+                    mediaPlayer.prepareAsync();
+                    mediaPlayer.start();
+                } catch (IOException e) {
+
                     e.printStackTrace();
                 }
-
-
             }
         });
-
     }
 
     @Override
     public void onPrepared(MediaPlayer mp) {
         mp.start();
     }
-
 
 
     @Override
@@ -110,7 +120,7 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_firebase_music:
-                Intent music = new Intent(getApplicationContext(), MusicActivity.class );
+                Intent music = new Intent(getApplicationContext(), MusicPlay.class );
                 startActivity(music);
                 break;
             case R.id.nav_youtube:

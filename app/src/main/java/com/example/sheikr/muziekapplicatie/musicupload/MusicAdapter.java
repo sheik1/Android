@@ -1,61 +1,50 @@
 package com.example.sheikr.muziekapplicatie.musicupload;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.sheikr.muziekapplicatie.R;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
-public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
+public class MusicAdapter extends ArrayAdapter<MusicModel> {
 
-    private Context context;
+    private Activity context;
     private List<MusicModel> muzieklijst;
 
-    public MusicAdapter(Context context, List<MusicModel> muzieklijst) {
+    public MusicAdapter(Activity context, List<MusicModel> muzieklijst) {
+        super(context, R.layout.activity_music_play, muzieklijst);
         this.context = context;
         this.muzieklijst = muzieklijst;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+    public View getView(int position,View convertView, ViewGroup parent) {
 
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_music_play, parent, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+        LayoutInflater inflater = context.getLayoutInflater();
 
-        return viewHolder;
-    }
+        View listViewItem = inflater.inflate(R.layout.activity_music_play, null);
 
-    @Override
-    public void onBindViewHolder( ViewHolder holder, int position) {
+        TextView textviewTitle = (TextView) listViewItem.findViewById(R.id.txtMusicName);
+        TextView textviewLink = (TextView) listViewItem.findViewById(R.id.txtMusicLink);
 
-        MusicModel lijst = muzieklijst.get(position);
+        MusicModel musicmodel = muzieklijst.get(position);
 
-        holder.textviewTitle.setText(lijst.getNaam());
-        holder.textviewLink.setText(lijst.getUrl());
-    }
+        textviewTitle.setText(musicmodel.getNaam());
+        textviewLink.setText(musicmodel.getUrl());
 
-    @Override
-    public int getItemCount() {
-        return muzieklijst.size();
-    }
+        return listViewItem;
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView textviewTitle;
-        public TextView textviewLink;
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            textviewTitle = (TextView) itemView.findViewById(R.id.txtMusicName);
-            textviewLink = (TextView) itemView.findViewById(R.id.txtMusicLink);
-        }
     }
 
 }

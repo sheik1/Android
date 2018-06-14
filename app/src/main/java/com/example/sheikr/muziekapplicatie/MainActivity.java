@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String email;
     private String  user;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
         navUsername.setText(user);
 
-
     }
 
     @Override
@@ -83,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_firebase_music:
-                Intent music = new Intent(getApplicationContext(), MusicActivity.class );
+                Intent music = new Intent(getApplicationContext(), MusicPlay.class );
                 startActivity(music);
                 break;
             case R.id.nav_youtube:
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_upload:
-                Intent upload = new Intent(getApplicationContext(), MusicPlay.class );
+                Intent upload = new Intent(getApplicationContext(), MusicUpload.class );
                 startActivity(upload);
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
@@ -133,8 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
-
-
 }
 
 
