@@ -13,9 +13,6 @@
         <item android:id="@+id/nav_youtube_list"
             android:icon="@drawable/ic_youtube_list"
             android:title="Youtube List"/>
-        <item android:id="@+id/nav_streamboxr"
-            android:icon="@drawable/ic_streamboxr"
-            android:title="Streamboxr"/>
         <item android:id="@+id/nav_visualizer"
             android:icon="@drawable/ic_viz"
             android:title="Visualizer"/>

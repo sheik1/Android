@@ -2,11 +2,9 @@ package com.example.sheikr.muziekapplicatie.musicupload;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,15 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+public class MusicPlay extends MainActivity {
 
-public class MusicPlay extends MainActivity  {
-
-    private DatabaseReference database;
-
-    private RecyclerView recyclerView;
-
-    private MediaPlayer mediaPlayer;
-
+    DatabaseReference database;
     ListView muziekListView;
     String url, user;
     List<MusicModel> muzieklijst;
@@ -39,12 +31,10 @@ public class MusicPlay extends MainActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_music_list);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MusicPlay.this);
         user = sp.getString("gebruiker", null);
-
 
         database = FirebaseDatabase.getInstance().getReference("music");
 
@@ -91,6 +81,4 @@ public class MusicPlay extends MainActivity  {
             }
         });
     }
-
-
 }

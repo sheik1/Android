@@ -120,6 +120,7 @@ public class YoutubeActivity extends MainActivity {
             case R.id.nav_firebase_music:
                 Intent music = new Intent(getApplicationContext(), MusicActivity.class );
                 startActivity(music);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_youtube:
                 Intent youtube = new Intent(getApplicationContext(), YoutubeActivity.class );
@@ -129,11 +130,6 @@ public class YoutubeActivity extends MainActivity {
             case R.id.nav_youtube_list:
                 Intent youtubelist = new Intent(getApplicationContext(), YoutubeListPanel.class );
                 startActivity(youtubelist);
-                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                break;
-            case R.id.nav_streamboxr:
-                Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );
-                startActivity(stream);
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.nav_visualizer:

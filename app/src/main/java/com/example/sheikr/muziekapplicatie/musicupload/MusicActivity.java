@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.sheikr.muziekapplicatie.MainActivity;
@@ -40,11 +41,19 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
     public String url;
     private MediaPlayer mediaPlayer;
 
+    private ImageButton btnPlay;
+    private ImageButton btnForward;
+    private ImageButton btnBackward;
+    private ImageButton btnPlaylist;
+    private TextView songTitleLabel;
+    private int seekForwardTime = 5000; // 5000 milliseconds
+    private int seekBackwardTime = 5000; // 5000 milliseconds
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_music_list);
+        setContentView(R.layout.activity_music_show);
 
         Intent musicPlay = getIntent();
         Bundle b = musicPlay.getExtras();
@@ -55,6 +64,13 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        btnPlay = (ImageButton) findViewById(R.id.btnPlay);
+        btnForward = (ImageButton) findViewById(R.id.btnForward);
+        btnBackward = (ImageButton) findViewById(R.id.btnBackward);
+        btnPlaylist = (ImageButton) findViewById(R.id.btnPlaylist);
+
+        songTitleLabel = (TextView) findViewById(R.id.songTitle);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(MusicActivity.this);
         user = sp.getString("gebruiker", null);
@@ -75,8 +91,79 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
         TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
         navUsername.setText(user);
 
+        SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String url =(mSharedPreference.getString("key", ""));
 
         fetchAudioUrlFromFirebase();
+
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // check for already playing
+                if(mediaPlayer.isPlaying()){
+                    if(mediaPlayer!=null){
+                        mediaPlayer.pause();
+                        // Changing button image to play button
+                        btnPlay.setImageResource(R.drawable.btn_play);
+                    }
+                }else{
+                    // Resume song
+                    if(mediaPlayer!=null){
+                        mediaPlayer.start();
+                        // Changing button image to pause button
+                        btnPlay.setImageResource(R.drawable.btn_pause);
+                    }
+                }
+
+            }
+        });
+
+
+        btnForward.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // get current song position
+                int currentPosition = mediaPlayer.getCurrentPosition();
+                // check if seekForward time is lesser than song duration
+                if(currentPosition + seekForwardTime <= mediaPlayer.getDuration()){
+                    // forward song
+                    mediaPlayer.seekTo(currentPosition + seekForwardTime);
+                }else{
+                    // forward to end position
+                    mediaPlayer.seekTo(mediaPlayer.getDuration());
+                }
+            }
+        });
+
+        btnBackward.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // get current song position
+                int currentPosition = mediaPlayer.getCurrentPosition();
+                // check if seekBackward time is greater than 0 sec
+                if(currentPosition - seekBackwardTime >= 0){
+                    // forward song
+                    mediaPlayer.seekTo(currentPosition - seekBackwardTime);
+                }else{
+                    // backward to starting position
+                    mediaPlayer.seekTo(0);
+                }
+
+            }
+        });
+
+        btnPlaylist.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent i = new Intent(getApplicationContext(), MusicPlay.class);
+                startActivityForResult(i, 100);
+                mediaPlayer.stop();
+            }
+        });
     }
 
     private void fetchAudioUrlFromFirebase(){
@@ -93,7 +180,6 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
                     mediaPlayer.prepareAsync();
                     mediaPlayer.start();
                 } catch (IOException e) {
-
                     e.printStackTrace();
                 }
             }
@@ -131,10 +217,6 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
                 Intent youtubelist = new Intent(getApplicationContext(), YoutubeListPanel.class );
                 startActivity(youtubelist);
                 break;
-            case R.id.nav_streamboxr:
-                Intent stream = new Intent(getApplicationContext(), PlayListActivity.class );
-                startActivity(stream);
-                break;
             case R.id.nav_visualizer:
                 Intent viz = new Intent(getApplicationContext(), VisualizerActivity.class );
                 startActivity(viz);
@@ -162,6 +244,5 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
         }
         return true;
     }
-
 
 }
