@@ -2,7 +2,6 @@ package com.example.sheikr.muziekapplicatie.musicupload;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +35,7 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
     private DrawerLayout drawer;
     private String user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +62,13 @@ public class MusicActivity extends MainActivity implements MediaPlayer.OnPrepare
         TextView navUsername = (TextView) headerView.findViewById(R.id.user_email_nav);
         navUsername.setText(user);
 
-        SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String url =(mSharedPreference.getString("key", ""));
 
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
 
-                    Uri myUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/musicapp-82f20.appspot.com/o/music%2Fdf296993-4046-4ce9-bbd4-1e266d49c429?alt=media&token=d953e887-77b9-410e-82aa-dcb9931dd935");
+                    Uri myUri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/musicapp-82f20.appspot.com/o/music%2F1ab89be3-abcf-41ea-800b-8e860b89d641?alt=media&token=215f5606-44d6-4b72-a5c5-cb588b4f3713");
                     System.out.println(myUri);
                     MediaPlayer mediaPlayer = new MediaPlayer();
                     mediaPlayer.setDataSource(v.getContext(), myUri);

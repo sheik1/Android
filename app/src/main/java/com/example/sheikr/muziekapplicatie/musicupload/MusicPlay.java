@@ -46,8 +46,7 @@ import java.util.List;
 public class MusicPlay extends MainActivity implements MediaPlayer.OnPreparedListener {
 
     private DatabaseReference database;
-    private SharedPreferences mPref;
-    private SharedPreferences.Editor mEdit;
+
     private RecyclerView recyclerView;
 
     private MediaPlayer mediaPlayer;
@@ -60,13 +59,7 @@ public class MusicPlay extends MainActivity implements MediaPlayer.OnPreparedLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_music_list);
-
-        mPref = PreferenceManager.getDefaultSharedPreferences(this);
-        mEdit = mPref.edit();
-
-        mEdit.putString("key", url);
-        mEdit.commit();
+        setContentView(R.layout.activity_music_play);
 
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerViewMusic);
