@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".visualizer.VisualizerActivity" android:label="@string/app_name">
+        <activity android:name=".visualizer.VisualizerActivity" android:label="@string/Visualizer" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -58,28 +58,35 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".drumpad.DrumpadActivity" android:label="@string/app_name">
+        <activity android:name=".drumpad.DrumpadActivity" android:label="@string/Drumpad" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".equalizer.EqualizerActivity" android:label="@string/app_name">
+        <activity android:name=".equalizer.EqualizerActivity" android:label="@string/Equalizer">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".youtubeLijst.YoutubeListPanel" android:label="@string/app_name">
+        <activity android:name=".youtubeLijst.YoutubeListPanel" android:label="@string/YouTubeList">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".youtubeplayer.YoutubeActivity" android:label="@string/app_name">
+        <activity android:name=".youtubeplayer.YoutubeActivity" android:label="@string/YouTube">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".musicupload.MusicUpload" android:label="@string/upload_Music">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
